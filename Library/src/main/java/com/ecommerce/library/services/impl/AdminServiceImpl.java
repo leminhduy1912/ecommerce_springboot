@@ -7,12 +7,16 @@ import com.ecommerce.library.entities.AdminEntity;
 import com.ecommerce.library.repositories.IAdminRepository;
 import com.ecommerce.library.services.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class AdminService implements IAdminService {
+public class AdminServiceImpl implements IAdminService {
     @Autowired
     private IAdminRepository adminRepository;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
     @Autowired
     private AdminConverter adminConverter;
         @Override
@@ -23,7 +27,9 @@ public class AdminService implements IAdminService {
 
 
     @Override
+    @Transactional
     public AdminDTO save(AdminDTO adminDto) {
-        return null;
+            System.out.println("saving" + adminDto);
+        return adminConverter.toDto(adminRepository.save(adminConverter.toEntity(adminDto)));
     }
 }

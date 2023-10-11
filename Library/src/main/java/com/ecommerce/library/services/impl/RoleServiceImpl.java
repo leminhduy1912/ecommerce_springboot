@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RoleService implements IRoleService {
+public class RoleServiceImpl implements IRoleService {
     @Autowired
     private IRoleRepository roleRepository;
     @Autowired
@@ -16,5 +16,10 @@ public class RoleService implements IRoleService {
     @Override
     public RoleDTO findByName(String name) {
         return roleConverter.toDto(roleRepository.findByName(name));
+    }
+
+    @Override
+    public RoleDTO findByCode(String code) {
+        return roleConverter.toDto(roleRepository.findByCode(code));
     }
 }

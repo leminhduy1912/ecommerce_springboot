@@ -1,4 +1,4 @@
-package com.ecommerce.admin.config;
+package com.ecommerce.admin.configs;
 
 import com.ecommerce.library.dtos.AdminDTO;
 import com.ecommerce.library.dtos.RoleDTO;
@@ -17,8 +17,8 @@ public class AdminDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        for(RoleDTO role : admin.getRoles()){
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        for(String role : admin.getRoleCodes()){
+            authorities.add(new SimpleGrantedAuthority(role));
         }
         return authorities;
     }

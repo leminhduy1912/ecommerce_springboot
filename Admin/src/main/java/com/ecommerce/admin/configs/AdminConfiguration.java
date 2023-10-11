@@ -1,5 +1,6 @@
-package com.ecommerce.admin.config;
+package com.ecommerce.admin.configs;
 
+import com.ecommerce.admin.configs.AdminServiceConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;

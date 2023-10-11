@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Collection;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,9 +23,7 @@ public class AdminDTO {
 
     private String password;
 
-
     private String image;
 
-
-    private Collection<RoleDTO> roles;
+    private List<String> roleCodes;
 }

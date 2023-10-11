@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "role")
@@ -21,4 +23,8 @@ public class RoleEntity {
     private Long id;
     @Column(name = "role_name")
     private String name;
+    @Column(name = "role_code")
+    private String code;
+    @ManyToMany(mappedBy = "roles")
+    private List<AdminEntity> users = new ArrayList<>();
 }
