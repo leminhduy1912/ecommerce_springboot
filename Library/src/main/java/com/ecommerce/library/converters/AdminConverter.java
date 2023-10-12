@@ -38,7 +38,9 @@ public class AdminConverter {
             }
             dto.setRoleCodes(roleCodes);
             dto.setImage(entity.getImage());
+
         }
+        System.out.println("admin dto" +dto);
         return dto;
     }
     public AdminEntity toEntity(AdminDTO dto){
@@ -54,10 +56,13 @@ public class AdminConverter {
         adminEntity.setPassword(passwordEncoder.encode(dto.getPassword()));
         List<RoleEntity> roleEntities = new ArrayList<>();
         for (String roleCode : dto.getRoleCodes()){
+
              roleEntities.add(roleConverter.toEntity(roleService.findByCode(roleCode)));
         }
+
         adminEntity.setRoles(roleEntities);
         adminEntity.setImage(dto.getImage());
+        System.out.println("admin entity" + adminEntity);
 
         return adminEntity;
     }

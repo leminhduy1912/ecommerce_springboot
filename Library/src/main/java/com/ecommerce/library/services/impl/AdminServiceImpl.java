@@ -20,8 +20,11 @@ public class AdminServiceImpl implements IAdminService {
     @Autowired
     private AdminConverter adminConverter;
         @Override
+        @Transactional
         public AdminDTO findByUsername(String username) {
+            System.out.println("tim thay admin" + username);
             AdminEntity adminEntity = adminRepository.findByUsername(username);
+
             return adminConverter.toDto(adminEntity);
         }
 
@@ -30,6 +33,7 @@ public class AdminServiceImpl implements IAdminService {
     @Transactional
     public AdminDTO save(AdminDTO adminDto) {
             System.out.println("saving" + adminDto);
+
         return adminConverter.toDto(adminRepository.save(adminConverter.toEntity(adminDto)));
     }
 }

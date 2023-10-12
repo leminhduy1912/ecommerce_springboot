@@ -27,4 +27,5 @@ public class RoleEntity {
     private String code;
     @ManyToMany(mappedBy = "roles")
     private List<AdminEntity> users = new ArrayList<>();
+
 }

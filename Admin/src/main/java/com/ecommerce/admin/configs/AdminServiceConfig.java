@@ -1,40 +1,35 @@
 package com.ecommerce.admin.configs;
 
-import com.ecommerce.library.dtos.AdminDTO;
-import com.ecommerce.library.services.IAdminService;
+import com.ecommerce.library.entities.AdminEntity;
+
+import com.ecommerce.library.repositories.IAdminRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
 public class AdminServiceConfig implements UserDetailsService {
-
     @Autowired
-    private IAdminService adminService;
+    private IAdminRepository adminRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AdminDTO admin = adminService.findByUsername(username);
+        AdminEntity admin = adminRepository.findByUsername(username);
+
         if (admin == null) {
             throw new UsernameNotFoundException("Could not find username");
         }
 
-        List<SimpleGrantedAuthority> authorities = admin.getRoleCodes()
-                .stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
-
         return new User(
                 admin.getUsername(),
                 admin.getPassword(),
-                authorities
-        );
+                admin.getRoles()
+                        .stream()
+                        .map(role -> new SimpleGrantedAuthority(role.getCode())).collect(Collectors.toList()));
     }
 }

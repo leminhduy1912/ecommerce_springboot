@@ -27,6 +27,7 @@ public class LoginController {
     private IAdminService adminService;
 
 
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -36,12 +37,12 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping("/index")
+    @GetMapping("/admin/index")
     public String home(Model model){
         model.addAttribute("title", "Home Page");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication == null || authentication instanceof  AnonymousAuthenticationToken){
-            return "redirect:/login";
+            return "login";
         }
         return "index";
     }
@@ -71,12 +72,12 @@ public class LoginController {
 
                 return "register";
             }
-
+            System.out.println(adminDto.getUsername());
             AdminDTO admin = adminService.findByUsername(adminDto.getUsername());
-            System.out.println("tim kiem admin " + admin);
+            System.out.println("admin" + admin);
             if(admin.getId() != null){
                 model.addAttribute("adminDto", adminDto);
-                System.out.println("admin not null");
+
                 model.addAttribute("emailError", "Your email has been registered!");
                 return "register";
             }
@@ -84,7 +85,7 @@ public class LoginController {
                 adminDto.setRoleCodes(Arrays.asList("ADMIN"));
                 AdminDTO dto = adminService.save(adminDto);
                 model.addAttribute("success", "Register successfully!");
-                System.out.println("thanh cong");
+
                 return "register";
             }
         } catch (Exception e){

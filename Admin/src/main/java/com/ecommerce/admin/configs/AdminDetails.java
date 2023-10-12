@@ -1,7 +1,8 @@
 package com.ecommerce.admin.configs;
 
-import com.ecommerce.library.dtos.AdminDTO;
-import com.ecommerce.library.dtos.RoleDTO;
+import com.ecommerce.library.entities.AdminEntity;
+import com.ecommerce.library.entities.RoleEntity;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,14 +12,13 @@ import java.util.Collection;
 import java.util.List;
 
 public class AdminDetails implements UserDetails {
-
-    private AdminDTO admin;
+    private AdminEntity admin;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        for(String role : admin.getRoleCodes()){
-            authorities.add(new SimpleGrantedAuthority(role));
+        for(RoleEntity role : admin.getRoles()){
+            authorities.add(new SimpleGrantedAuthority(role.getCode()));
         }
         return authorities;
     }

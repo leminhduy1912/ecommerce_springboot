@@ -1,6 +1,5 @@
 package com.ecommerce.admin.configs;
 
-import com.ecommerce.admin.configs.AdminServiceConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -41,14 +40,14 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/*").permitAll()
-                .antMatchers("/admin/*")
-                .hasAuthority("ADMIN")
+        http.authorizeRequests()
+                .antMatchers("/admin/**").hasAuthority("ADMIN") // Tất cả các URL bắt đầu bằng /admin yêu cầu quyền ADMIN
+                .antMatchers("/*").permitAll() // Cho phép tất cả mọi người truy cập các URL khác
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/do-login")
-                .defaultSuccessUrl("/index")
+                .defaultSuccessUrl("/admin/index")
                 .permitAll()
                 .and()
                 .logout()
@@ -57,5 +56,13 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout")
                 .permitAll();
+        http
+                .sessionManagement()
+                .sessionFixation().migrateSession() // Tránh tấn công session fixation
+                .maximumSessions(1).maxSessionsPreventsLogin(false)
+                .expiredUrl("/login?expired"); // Đường dẫn khi session hết hiệu lực
+
     }
+
+
 }
