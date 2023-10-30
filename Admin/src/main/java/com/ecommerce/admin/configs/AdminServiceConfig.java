@@ -2,7 +2,7 @@ package com.ecommerce.admin.configs;
 
 import com.ecommerce.library.entities.AdminEntity;
 
-import com.ecommerce.library.repositories.IAdminRepository;
+import com.ecommerce.library.repositories.AdminRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class AdminServiceConfig implements UserDetailsService {
     @Autowired
-    private IAdminRepository adminRepository;
+    private AdminRepository adminRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

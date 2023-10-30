@@ -47,7 +47,7 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/do-login")
-                .defaultSuccessUrl("/admin/index")
+                .defaultSuccessUrl("/admin/products/1")
                 .permitAll()
                 .and()
                 .logout()

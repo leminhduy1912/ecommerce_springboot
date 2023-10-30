@@ -4,17 +4,20 @@ package com.ecommerce.library.services.impl;
 import com.ecommerce.library.converters.AdminConverter;
 import com.ecommerce.library.dtos.AdminDTO;
 import com.ecommerce.library.entities.AdminEntity;
-import com.ecommerce.library.repositories.IAdminRepository;
+import com.ecommerce.library.entities.ProductEntity;
+import com.ecommerce.library.repositories.AdminRepository;
 import com.ecommerce.library.services.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 public class AdminServiceImpl implements IAdminService {
     @Autowired
-    private IAdminRepository adminRepository;
+    private AdminRepository adminRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
     @Autowired
@@ -36,4 +39,6 @@ public class AdminServiceImpl implements IAdminService {
 
         return adminConverter.toDto(adminRepository.save(adminConverter.toEntity(adminDto)));
     }
+
+
 }
