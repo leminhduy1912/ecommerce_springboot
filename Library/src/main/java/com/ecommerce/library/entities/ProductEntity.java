@@ -30,7 +30,7 @@ public class ProductEntity extends BaseEntity {
     private double salePrice;
     @Column(name="product_image")
     private String image;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private CategoryEntity category;
     @Column(name = "product_status")

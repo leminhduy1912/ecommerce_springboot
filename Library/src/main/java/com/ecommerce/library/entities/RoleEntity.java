@@ -3,10 +3,7 @@ package com.ecommerce.library.entities;
 
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,7 +12,8 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "role")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoleEntity extends BaseEntity {
@@ -27,7 +25,5 @@ public class RoleEntity extends BaseEntity {
     private String name;
     @Column(name = "role_code")
     private String code;
-    @ManyToMany(mappedBy = "roles")
-    private List<AdminEntity> users = new ArrayList<>();
 
 }

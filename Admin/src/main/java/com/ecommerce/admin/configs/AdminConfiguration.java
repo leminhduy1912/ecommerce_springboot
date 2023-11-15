@@ -7,9 +7,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import java.util.Collection;
 
 @Configuration
 @EnableWebSecurity
@@ -41,13 +44,25 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/admin/**").hasAuthority("ADMIN") // Tất cả các URL bắt đầu bằng /admin yêu cầu quyền ADMIN
-                .antMatchers("/*").permitAll() // Cho phép tất cả mọi người truy cập các URL khác
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/customer/**").hasAuthority("CUSTOMER")
+                .antMatchers("/*").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/do-login")
-                .defaultSuccessUrl("/admin/products/1")
+                .successHandler((request, response, authentication) -> {
+                    // Lấy danh sách quyền của người dùng
+                    Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+                    // Nếu người dùng có quyền ADMIN
+                    if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ADMIN"))) {
+                        response.sendRedirect("/admin/products/1");
+                    }
+                    // Nếu người dùng có quyền CUSTOMER
+                    else if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("CUSTOMER"))) {
+                        response.sendRedirect("/customer/index");
+                    }
+                })
                 .permitAll()
                 .and()
                 .logout()
@@ -56,13 +71,12 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout")
                 .permitAll();
+
         http
                 .sessionManagement()
-                .sessionFixation().migrateSession() // Tránh tấn công session fixation
+                .sessionFixation().migrateSession()
                 .maximumSessions(1).maxSessionsPreventsLogin(false)
-                .expiredUrl("/login?expired"); // Đường dẫn khi session hết hiệu lực
-
+                .expiredUrl("/login?expired");
     }
-
 
 }

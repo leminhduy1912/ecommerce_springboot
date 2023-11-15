@@ -1,6 +1,5 @@
 package com.ecommerce.library.dtos;
 
-import com.ecommerce.library.entities.CategoryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

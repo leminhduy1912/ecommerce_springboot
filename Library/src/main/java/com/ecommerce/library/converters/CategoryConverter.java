@@ -4,8 +4,6 @@ import com.ecommerce.library.dtos.CategoryDTO;
 import com.ecommerce.library.entities.CategoryEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Component
 public class CategoryConverter {
     public CategoryEntity toEntity(CategoryEntity dto){
