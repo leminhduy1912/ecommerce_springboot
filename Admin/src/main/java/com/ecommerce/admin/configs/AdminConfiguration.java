@@ -56,7 +56,7 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
                     Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
                     // Nếu người dùng có quyền ADMIN
                     if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ADMIN"))) {
-                        response.sendRedirect("/admin/products/1");
+                        response.sendRedirect("/admin/dashboard");
                     }
                     // Nếu người dùng có quyền CUSTOMER
                     else if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("CUSTOMER"))) {

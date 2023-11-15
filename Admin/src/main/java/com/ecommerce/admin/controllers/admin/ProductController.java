@@ -27,17 +27,17 @@ public class ProductController {
     private IProductService iProductService;
     @Autowired
     private ICategoryService iCategoryService;
-//    @GetMapping("/admin/products")
-//    public String getAllProducts(Model model){
+    @GetMapping("/admin/products")
+    public String getAllProducts(Model model){
 //        List<ProductDTO> products = iProductService.findAllProduct();
 //        model.addAttribute("products",products);
 //        model.addAttribute("size",products.size());
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-//            return "login";
-//        }
-//        return "products";
-//    }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return "admin/login";
+        }
+        return "admin/products";
+    }
     @GetMapping("admin/products/{pageNo}")
     public String allProducts(@PathVariable("pageNo") int pageNo,
                               Model model,

@@ -29,8 +29,13 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginForm(Model model){
-        model.addAttribute("title", "Login");
-        return "/admin/login";
+        //model.addAttribute("title", "Login");
+        return "/admin/sign-in";
+    }
+    @GetMapping("/admin/dashboard")
+    public String dashBoard(Model model){
+        //model.addAttribute("title", "Login");
+        return "/admin/dashboard";
     }
 
     @GetMapping("/admin/index")
