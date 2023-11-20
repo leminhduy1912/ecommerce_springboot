@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -17,9 +18,8 @@ import java.util.List;
 @Table(name = "orders")
 public class OrderEntity extends BaseEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
-    private Long id;
+    private String id;
     @Column(name = "order_date")
     private Date orderDate;
     @Column(name = "delivery_date")

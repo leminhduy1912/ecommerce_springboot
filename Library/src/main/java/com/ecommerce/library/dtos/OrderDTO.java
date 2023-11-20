@@ -6,11 +6,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDTO {
-    private Long orderId;
+    private String orderId;
     private Date orderDate;
     private Date deliveryDate;
     private String orderStatus;
@@ -19,6 +21,6 @@ public class OrderDTO {
     private int quantity;
     private String paymentMethod;
     private boolean isAccept;
-    private Long  userId;
+    private String  userId;
     private List<OrderDetailDTO> orderDetails;
 }

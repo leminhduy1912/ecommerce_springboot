@@ -4,13 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDTO {
 
-    private Long id;
+    private String id;
 
     private String name;
 
@@ -25,7 +27,7 @@ public class ProductDTO {
     private String image;
 
 
-    private Long categoryId;
+    private String categoryId;
     private String categoryName;
 
     private int is_activated;

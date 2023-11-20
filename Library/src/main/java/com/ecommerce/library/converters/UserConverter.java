@@ -63,6 +63,7 @@ public class UserConverter {
         List<RoleEntity> roleEntities = new ArrayList<>();
         for (String roleCode : dto.getRoleCodes()){
             roleEntities.add(roleConverter.toEntity(roleService.findByCode(roleCode)));
+            System.out.println("role find"+roleService.findByCode(roleCode));
         }
 
         userEntity.setRoles(roleEntities);

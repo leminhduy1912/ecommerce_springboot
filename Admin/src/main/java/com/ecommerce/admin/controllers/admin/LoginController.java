@@ -1,6 +1,8 @@
 package com.ecommerce.admin.controllers.admin;
 
 import com.ecommerce.library.dtos.UserDTO;
+import com.ecommerce.library.entities.RoleEntity;
+import com.ecommerce.library.services.IRoleService;
 import com.ecommerce.library.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -21,6 +23,8 @@ import java.util.Arrays;
 public class LoginController {
     @Autowired
     private IUserService adminService;
+    @Autowired
+    private IRoleService roleService;
 
 
 
@@ -29,7 +33,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginForm(Model model){
-        //model.addAttribute("title", "Login");
+
         return "/admin/sign-in";
     }
     @GetMapping("/admin/dashboard")
@@ -50,9 +54,8 @@ public class LoginController {
 
     @GetMapping("/register")
     public String register(Model model){
-        model.addAttribute("title", "Register");
         model.addAttribute("adminDto", new UserDTO());
-        return "admin/register";
+        return "admin/sign-up";
     }
 
     @GetMapping("/forgot-password")
@@ -71,7 +74,7 @@ public class LoginController {
             if(result.hasErrors()){
                 model.addAttribute("adminDto", adminDto);
 
-                return "/admin/register";
+                return "admin/sign-up";
             }
 
             UserDTO admin = adminService.findByUsername(adminDto.getUsername());
@@ -80,20 +83,20 @@ public class LoginController {
                 model.addAttribute("adminDto", adminDto);
 
                 model.addAttribute("emailError", "Your email has been registered!");
-                return "admin/register";
+                return "admin/sign-up";
             }
             else{
                 adminDto.setRoleCodes(Arrays.asList("CUSTOMER"));
                 UserDTO dto = adminService.save(adminDto);
                 model.addAttribute("success", "Register successfully!");
 
-                return "admin/register";
+                return "admin/sign-up";
             }
         } catch (Exception e){
             e.printStackTrace();
             model.addAttribute("errors", "The server has been wrong!");
         }
-        return "admin/register";
+        return "admin/sign-up";
 
     }
 

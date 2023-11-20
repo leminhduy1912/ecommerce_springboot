@@ -29,13 +29,13 @@ public class ShoppingCartService implements IShoppingCartService {
 //    @Autowired
 //    private ShoppingCartConverter shoppingCartConverter;
 
-    private CartItemEntity find(Set<CartItemEntity> cartItems, long productId) {
+    private CartItemEntity find(Set<CartItemEntity> cartItems, String productId) {
         if (cartItems == null) {
             return null;
         }
         CartItemEntity cartItem = null;
         for (CartItemEntity item : cartItems) {
-            if (item.getProduct().getId() == productId) {
+            if (item.getProduct().getId() == String.valueOf(productId)){
                 cartItem = item;
             }
         }
@@ -70,13 +70,13 @@ public class ShoppingCartService implements IShoppingCartService {
         }
         return totalPrice;
     }
-    private CartItemDTO findInDTO(ShoppingCartDTO shoppingCart, long productId) {
+    private CartItemDTO findInDTO(ShoppingCartDTO shoppingCart, String productId) {
         if (shoppingCart == null) {
             return null;
         }
         CartItemDTO cartItem = null;
         for (CartItemDTO item : shoppingCart.getCartItems()) {
-            if (item.getProductDTO().getId() == productId) {
+            if (item.getProductDTO().getId() == String.valueOf(productId)) {
                 cartItem = item;
             }
         }
@@ -265,16 +265,21 @@ public class ShoppingCartService implements IShoppingCartService {
 
     @Override
     public void deleteCartById(Long id) {
-        ShoppingCartEntity  shoppingCart = shoppingCartRepository.getById(id);
-        for (CartItemEntity item : shoppingCart.getCartItems()){
-            cartItemRepository.deleteById(item.getId());
-        }
-        shoppingCart.setUser(null);
-        shoppingCart.getCartItems().clear();
-        shoppingCart.setTotalPrice(0);
-        shoppingCart.setTotalItems(0);
-        shoppingCartRepository.save(shoppingCart);
+
     }
+
+//    @Override
+//    public void deleteCartById(Long id) {
+//        ShoppingCartEntity  shoppingCart = shoppingCartRepository.getById(id);
+//        for (CartItemEntity item : shoppingCart.getCartItems()){
+//            cartItemRepository.deleteById(item.getId());
+//        }
+//        shoppingCart.setUser(null);
+//        shoppingCart.getCartItems().clear();
+//        shoppingCart.setTotalPrice(0);
+//        shoppingCart.setTotalItems(0);
+//        shoppingCartRepository.save(shoppingCart);
+//    }
 
     @Override
     public ShoppingCartEntity getCartByUsername(String username) {

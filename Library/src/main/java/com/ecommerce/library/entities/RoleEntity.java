@@ -8,6 +8,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -18,9 +19,8 @@ import java.util.List;
 @NoArgsConstructor
 public class RoleEntity extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
-    private Long id;
+    private String id;
     @Column(name = "role_name")
     private String name;
     @Column(name = "role_code")

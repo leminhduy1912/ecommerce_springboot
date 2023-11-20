@@ -20,9 +20,8 @@ import java.util.UUID;
 
 public class UserEntity extends  BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id;
+    private String id;
 
     @Column(name = "firstname")
     private String firstName;
@@ -50,7 +49,7 @@ public class UserEntity extends  BaseEntity {
 
 
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
     private List<RoleEntity> roles;

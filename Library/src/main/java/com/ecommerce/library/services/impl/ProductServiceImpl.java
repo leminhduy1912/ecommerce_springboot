@@ -99,7 +99,7 @@ public class ProductServiceImpl implements IProductService {
       entity.setIsActivated(1);
       entity.setIsDeleted(0);
 
-    Optional<CategoryEntity> optionalCategory = categoryRepository.findById(dto.getCategoryId());
+    Optional<CategoryEntity> optionalCategory = categoryRepository.findById(Long.parseLong(dto.getCategoryId()));
     if (optionalCategory.isPresent()) {
       CategoryEntity category = optionalCategory.get();
       entity.setCategory(category);
@@ -127,7 +127,7 @@ public class ProductServiceImpl implements IProductService {
           productEntity.setIsActivated(1);
           productEntity.setIsDeleted(0);
           if(updateProduct.getCategoryId() != null){
-              Optional<CategoryEntity> optionalCategory = categoryRepository.findById(updateProduct.getCategoryId());
+              Optional<CategoryEntity> optionalCategory = categoryRepository.findById(Long.parseLong(updateProduct.getCategoryId()));
               if (optionalCategory.isPresent()) {
                   CategoryEntity category = optionalCategory.get();
                   productEntity.setCategory(category);

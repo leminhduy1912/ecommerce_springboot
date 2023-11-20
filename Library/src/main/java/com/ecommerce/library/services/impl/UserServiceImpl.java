@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 public class UserServiceImpl implements IUserService {
     @Autowired
@@ -41,9 +43,11 @@ public class UserServiceImpl implements IUserService {
     @Override
     @Transactional
     public UserDTO save(UserDTO adminDto) {
-            System.out.println("saving" + adminDto);
 
-        return userConverter.toDto(userRepository.save(userConverter.toEntity(adminDto)));
+            UserEntity userEntity = userConverter.toEntity(adminDto);
+            userEntity.setId(UUID.randomUUID().toString());
+        System.out.println("saving" + userEntity);
+        return userConverter.toDto(userRepository.save(userEntity));
     }
 
     @Override

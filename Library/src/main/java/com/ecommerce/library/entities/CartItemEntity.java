@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -15,9 +16,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class CartItemEntity extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_item_id")
-    private Long id;
+    private String id;
     @Column(name = "quantity")
     private int quantity;
     @Column(name = "unit_price")

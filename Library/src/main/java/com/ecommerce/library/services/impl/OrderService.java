@@ -25,32 +25,33 @@ public class OrderService implements IOrderService {
 
     @Override
     public OrderEntity save(ShoppingCartEntity shoppingCartEntity) {
-        OrderEntity orderEntity = new OrderEntity();
-        //find user of order
-        UserEntity userEntity = new UserEntity();
-        if (userRepository.existsById(shoppingCartEntity.getId())){
-            userEntity = userRepository.findById(shoppingCartEntity.getUser().getId()).get();
-        }
-        orderEntity.setUser(userEntity);
-        //set time order
-        long deliveryTimeInMillis = System.currentTimeMillis();
-        Date orderDate = new Date(deliveryTimeInMillis);
-        orderEntity.setOrderDate(orderDate);
-        orderEntity.setTax(10);
-        orderEntity.setAccept(false);
-        orderEntity.setPaymentMethod("Cash");
-        orderEntity.setOrderStatus("Pending");
-        orderEntity.setQuantity(shoppingCartEntity.getTotalItems());
-        List<OrderDetailEntity> orderDetailEntities = new ArrayList<>();
-        for(CartItemEntity cartItemEntity : shoppingCartEntity.getCartItems()){
-            OrderDetailEntity orderDetailEntity = new OrderDetailEntity();
-            orderDetailEntity.setProduct(cartItemEntity.getProduct());
-            orderDetailEntity.setOrder(orderEntity);
-            orderDetailRepository.save(orderDetailEntity);
-            orderDetailEntities.add(orderDetailEntity);
-        }
-        orderEntity.setOrderDetailList(orderDetailEntities);
-        return orderRepository.save(orderEntity);
+//        OrderEntity orderEntity = new OrderEntity();
+//        //find user of order
+//        UserEntity userEntity = new UserEntity();
+//        if (userRepository.existsById(shoppingCartEntity.getId())){
+//            userEntity = userRepository.findById(shoppingCartEntity.getUser().getId()).get();
+//        }
+//        orderEntity.setUser(userEntity);
+//        //set time order
+//        long deliveryTimeInMillis = System.currentTimeMillis();
+//        Date orderDate = new Date(deliveryTimeInMillis);
+//        orderEntity.setOrderDate(orderDate);
+//        orderEntity.setTax(10);
+//        orderEntity.setAccept(false);
+//        orderEntity.setPaymentMethod("Cash");
+//        orderEntity.setOrderStatus("Pending");
+//        orderEntity.setQuantity(shoppingCartEntity.getTotalItems());
+//        List<OrderDetailEntity> orderDetailEntities = new ArrayList<>();
+//        for(CartItemEntity cartItemEntity : shoppingCartEntity.getCartItems()){
+//            OrderDetailEntity orderDetailEntity = new OrderDetailEntity();
+//            orderDetailEntity.setProduct(cartItemEntity.getProduct());
+//            orderDetailEntity.setOrder(orderEntity);
+//            orderDetailRepository.save(orderDetailEntity);
+//            orderDetailEntities.add(orderDetailEntity);
+//        }
+//        orderEntity.setOrderDetailList(orderDetailEntities);
+//        return orderRepository.save(orderEntity);
+        return null;
     }
 
     @Override

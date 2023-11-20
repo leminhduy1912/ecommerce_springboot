@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -15,9 +16,8 @@ import javax.persistence.*;
 @Table(name = "categories")
 public class CategoryEntity extends BaseEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
-    private Long id;
+    private String id;
     @Column(name = "category_name")
     private String name;
     @Column(name = "category_code")
