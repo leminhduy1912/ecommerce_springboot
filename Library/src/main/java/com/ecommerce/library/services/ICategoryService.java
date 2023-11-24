@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ICategoryService  {
     List<CategoryDTO> findAllExist();
+    String addCategory(CategoryDTO dto);
 }

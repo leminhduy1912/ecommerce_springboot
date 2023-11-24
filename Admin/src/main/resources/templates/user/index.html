@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head th:replace = "~{fragments::header}">
+<html lang="en" xmlns:th = "https://www.thymeleaf.org/">
+<head th:replace="~{user/fragments/header}">
 </head>
 
 <body id="page-top">
@@ -10,7 +9,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul th:replace = "~{fragments::sidebar}">
+        <ul th:replace = "~{user/fragments/sidebar}">
 
         </ul>
         <!-- End of Sidebar -->
@@ -22,7 +21,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav  th:replace = "~{fragments::top-navbar}">
+                <nav  th:replace = "~{user/fragments/top-bar}">
                 </nav>
                 <!-- End of Topbar -->
 
@@ -361,7 +360,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer th:replace = "~{fragments::footer}"></footer>
+            <footer th:replace = "~{user/fragments/footer}"></footer>
             <!-- End of Footer -->
 
         </div>
@@ -370,9 +369,9 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a th:replace = "~{fragments::scroll}" >
-    </a>
+<!--    &lt;!&ndash; Scroll to Top Button&ndash;&gt;-->
+<!--    <a th:replace = "~{fragments::scroll}" >-->
+<!--    </a>-->
     <div th:replace = "~{fragments::script}"></div>
     <!-- Page level plugins -->
     <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>

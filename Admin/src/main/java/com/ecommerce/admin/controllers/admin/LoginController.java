@@ -86,7 +86,7 @@ public class LoginController {
                 return "admin/sign-up";
             }
             else{
-                adminDto.setRoleCodes(Arrays.asList("CUSTOMER"));
+                adminDto.setRoleCodes(Arrays.asList("ADMIN"));
                 UserDTO dto = adminService.save(adminDto);
                 model.addAttribute("success", "Register successfully!");
 

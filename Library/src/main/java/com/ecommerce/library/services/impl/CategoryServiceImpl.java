@@ -25,4 +25,12 @@ public class CategoryServiceImpl implements ICategoryService {
         }
         return dtos;
     }
+
+    @Override
+    public String addCategory(CategoryDTO dto) {
+        CategoryEntity entity = categoryConverter.toEntity(dto);
+        entity.setIsActivated(1);
+        entity.setIsDeleted(0);
+        return categoryRepository.save(entity).getId();
+    }
 }

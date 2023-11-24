@@ -79,7 +79,6 @@ public class ProductController {
     }
     @GetMapping("/admin/products/add-product")
     public String addProductPage(Model model) {
-        model.addAttribute("title", "Add Product");
         List<CategoryDTO> categories = iCategoryService.findAllExist();
         model.addAttribute("categories", categories);
         model.addAttribute("productDto", new ProductDTO());

@@ -77,6 +77,11 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionFixation().migrateSession()
                 .maximumSessions(1).maxSessionsPreventsLogin(false)
                 .expiredUrl("/login?expired");
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .anyRequest().permitAll();
+
     }
 
 }

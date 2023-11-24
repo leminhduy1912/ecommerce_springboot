@@ -98,8 +98,9 @@ public class ProductServiceImpl implements IProductService {
     }
       entity.setIsActivated(1);
       entity.setIsDeleted(0);
-
+      System.out.println("searching category");
     Optional<CategoryEntity> optionalCategory = categoryRepository.findById(Long.parseLong(dto.getCategoryId()));
+    System.out.println("category"+ optionalCategory);
     if (optionalCategory.isPresent()) {
       CategoryEntity category = optionalCategory.get();
       entity.setCategory(category);
